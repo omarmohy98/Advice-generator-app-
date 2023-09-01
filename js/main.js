@@ -6,19 +6,17 @@ let generateNewQuoteEle = document.querySelector(".icon");
 async function getDataFromApi(apiLink) {
   try {
     let response = await fetch(apiLink);
-    return await response.json();
+    let data = await response.json();
+    idEle.innerHTML = data.slip.id;
+    quoteEle.innerHTML = data.slip.advice;
   } catch (err) {
     throw new Error(err);
   }
 }
 
-// display Quote in page
-function display() {
-  getDataFromApi("https://api.adviceslip.com/advice").then((data) => {
-    idEle.innerHTML = data.slip.id;
-    quoteEle.innerHTML = data.slip.advice;
-  });
-}
+getDataFromApi("https://api.adviceslip.com/advice");
 
 // generate New quote when dice icon clicked
-generateNewQuoteEle.addEventListener("click", display);
+generateNewQuoteEle.addEventListener("click", () => {
+  getDataFromApi("https://api.adviceslip.com/advice");
+});
