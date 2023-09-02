@@ -5,7 +5,7 @@ let generateNewQuoteEle = document.querySelector(".icon");
 // get random advice from api
 async function getDataFromApi(apiLink) {
   try {
-    let response = await fetch(apiLink);
+    let response = await fetch(apiLink, { cache: "no-cache" });
     let data = await response.json();
     idEle.innerHTML = data.slip.id;
     quoteEle.innerHTML = data.slip.advice;
